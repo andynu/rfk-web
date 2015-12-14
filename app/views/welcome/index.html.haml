@@ -1,8 +1,7 @@
 !!!
-%html(ng-app='welcomeApp')
+%html(ng-app='welcomeApp' ng-controller='welcomeCtrl')
   %head
-    :coffee
-      window.clock = ($scope) -> $scope.currentTime = new Date().getTime()
+    %title(ng-bind-template="angular: {{query}}") angular
     = javascript_include_tag 'application', debug: false
     = stylesheet_link_tag    'application', media: 'all', debug: false
 
@@ -11,10 +10,14 @@
       .row-fluid
         .col-xs-12
           %h1 Welcome
-          .well(ng-controller='welcomeCtrl')
+          .well
             {{ currentTime }}
-          .well(ng-controller='welcomeCtrl')
-            %ul
-              %li(ng-repeat="song in songs")
-                s:{{song.hash}}
+          .well
+            .input-group
+              %span.input-group-addon
+                = fa_icon('search')
+              %input.form-control(ng-model='query' type='text')
+            %ul.list-group
+              %li.list-group-item(ng-repeat="song in songs | filter:query")
+                {{song.hash}}
 
