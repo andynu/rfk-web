@@ -15,4 +15,5 @@
 //= require twitter/bootstrap
 //= require turbolinks
 //= require angular
+//= require angular_controllers
 //= require_tree .

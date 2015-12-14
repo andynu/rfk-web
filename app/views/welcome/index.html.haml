@@ -1,13 +1,20 @@
 !!!
-%html{lang:'en', "ng-app"=>true}
+%html(ng-app='welcomeApp')
   %head
-    = javascript_include_tag 'application'
-    = stylesheet_link_tag    'application', media: 'all'
+    :coffee
+      window.clock = ($scope) -> $scope.currentTime = new Date().getTime()
+    = javascript_include_tag 'application', debug: false
+    = stylesheet_link_tag    'application', media: 'all', debug: false
 
   %body
     .container-fluid
       .row-fluid
         .col-xs-12
           %h1 Welcome
-          {{ 1 + 1 }}
+          .well(ng-controller='welcomeCtrl')
+            {{ currentTime }}
+          .well(ng-controller='welcomeCtrl')
+            %ul
+              %li(ng-repeat="song in songs")
+                s:{{song.hash}}
 
