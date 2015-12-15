@@ -44,6 +44,8 @@ group :development, :test do
   gem 'guard-livereload'
   gem 'guard-shell'
   gem 'guard-bundler'
+  gem 'guard-jasmine'
+  gem 'jasmine-rails'
 end
 
 group :development do
