@@ -16,25 +16,49 @@ app.controller 'welcomeCtrl', ['$scope','Rfk', ($scope,rfk) ->
 
       $scope.rfk_status = data
 
+    result = rfk.requests()
+    result.success (data) ->
+      console.log "requests: %o", data
+      if data is "null"
+        $scope.requests = []
+      else
+        $scope.requests = data
+
+
+
   updateStatus()
-  setInterval updateStatus, 1000
+  setInterval updateStatus, 1000*10
 
   $scope.skip = -> rfk.skip()
   $scope.reward = -> rfk.reward()
   $scope.playpause = -> rfk.playpause()
+  $scope.clearRequests = -> 
+    rfk.clearRequests()
+    $scope.requests = []
+  
+  $scope.searchRequest = ->
+    term = $scope.term
+    rfk.searchRequest(term)
+    $scope.term = ""
+    $scope.search_songs = []
+    updateStatus()
+
+  $scope.search = ->
+    term = $scope.term
+    if term.length > 2
+      result = rfk.search({ term:term, limit: 10})
+      result.success (data) ->
+        $scope.search_songs = data
+    else
+      $scope.search_songs = []
 
   $scope.currentTime = new Date().getTime()
 
-  $scope.songs = [
-    {hash: Math.random(), name: 'a'},
-    {hash: Math.random(), name: 'd'},
-    {hash: Math.random(), name: 'b'},
-    {hash: Math.random(), name: 'e'},
-    {hash: Math.random(), name: 'c'},
-  ]
+  $scope.requests = []
+  $scope.search_songs = []
 
-  $scope.orderProp = 'hash'
-  ]
+
+]
 
 app.factory 'Rfk', ['$http', ($http) ->
   new class Rfk
@@ -52,4 +76,21 @@ app.factory 'Rfk', ['$http', ($http) ->
 
     status: ->
       return $http.get("#{@baseUrl}/status")
+
+    search: (params) ->
+      # {term:, limit:}
+      return $http.get("#{@baseUrl}/search", {params:params})
+
+    searchRequest: (term) ->
+      data = {term: term}
+      params = {params: data}
+      return $http.get("#{@baseUrl}/searchRequest", params)
+
+    requests: (params) ->
+      # {term:, limit:}
+      return $http.get("#{@baseUrl}/requests")
+
+    clearRequests: ->
+      $http.get("#{@baseUrl}/clearRequests")
+
 ]
