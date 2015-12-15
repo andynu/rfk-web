@@ -22,16 +22,26 @@
 
                 .btn-group
                   %button.btn.btn-success(ng-click='reward()')
-                    = fa_icon('plus')
+                    = fa_icon('thumbs-up')
                   %button.btn.btn-danger(ng-click='skip()')
-                    = fa_icon('minus')
-              %b {{ rfk.status.CurrentSongMeta.Title }}
-              %span.label.label-info {{rfk.status.CurrentSong.Rank}}
+                    = fa_icon('thumbs-down')
+              %b {{ currentSong.Title }}
+              %span.label.label-info {{currentSong.Rank}}
               %br
-              {{ rfk.status.CurrentSongMeta.Artist }}
+              {{ currentSong.Artist }}
               %br
-              %i {{ rfk.status.CurrentSongMeta.Album }}
+              %i {{ currentSong.Album }}
           .well
+            %i Last Song
+            %ul.list-group
+              %li.list-group-item.text-muted
+                %b {{ lastSong.Title }}
+                %span.label.label-default {{lastSong.Rank}}
+                %br
+                {{ lastSong.Artist }}
+                %br
+                %i {{ lastSong.Album }}
+            %hr
             %form.form-inline
               .input-group
                 %span.input-group-addon
