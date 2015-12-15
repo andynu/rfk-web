@@ -1,19 +1,11 @@
 
-
 app = angular.module('welcomeApp', [])
-@welcomeApp = app
 
-#@welcomeApp.config ['$routeProvider', ($routeProvider) ->
-#  $routeProvider.
-#    when('/skip' {
+app.controller 'welcomeCtrl', ['$scope','Rfk', ($scope,rfk) ->
 
-app.controller 'welcomeCtrl', ($scope, $http) ->
-
-  $scope.rfk = {}
-  $scope.rfk.api = new Rfk('http://localhost:7778')
-
-  load_status = ->
-    $http.get('http://localhost:7778/status').success (data) ->
+  updateStatus = () =>
+    result = rfk.status()
+    result.success (data) ->
       $scope.currentSong = {}
       $.extend $scope.currentSong, data.CurrentSong
       $.extend $scope.currentSong, data.CurrentSongMeta
@@ -22,9 +14,14 @@ app.controller 'welcomeCtrl', ($scope, $http) ->
       $.extend $scope.lastSong, data.LastSong
       $.extend $scope.lastSong, data.LastSongMeta
 
-      $scope.rfk.status = data
+      $scope.rfk_status = data
 
-  setInterval load_status, 1000
+  updateStatus()
+  setInterval updateStatus, 1000
+
+  $scope.skip = -> rfk.skip()
+  $scope.reward = -> rfk.reward()
+  $scope.playpause = -> rfk.playpause()
 
   $scope.currentTime = new Date().getTime()
 
@@ -37,13 +34,22 @@ app.controller 'welcomeCtrl', ($scope, $http) ->
   ]
 
   $scope.orderProp = 'hash'
+  ]
 
-  $scope.skip = () ->
-    $scope.rfk.api.skip()
+app.factory 'Rfk', ['$http', ($http) ->
+  new class Rfk
+    constructor: ->
+      @baseUrl = 'http://localhost:7778'
 
-  $scope.reward = () ->
-    $scope.rfk.api.reward()
+    skip: ->
+      $http.post("#{@baseUrl}/skip")
 
-  $scope.playpause = () ->
-    $scope.rfk.api.playpause()
+    reward:  ->
+      $http.post("#{@baseUrl}/reward")
 
+    playpause:  ->
+      $http.post("#{@baseUrl}/playpause")
+
+    status: ->
+      return $http.get("#{@baseUrl}/status")
+]
