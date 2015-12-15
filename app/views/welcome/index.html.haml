@@ -10,14 +10,41 @@
       .row-fluid
         .col-xs-12
           %h1 Welcome
+          .panel.panel-default
+            .panel-heading
+              Playing
+            .panel-body
+              .pull-right
+                .btn-group
+                  %button.btn.btn-default(ng-click='playpause()')
+                    = fa_icon('play')
+                    = fa_icon('pause')
+
+                .btn-group
+                  %button.btn.btn-success(ng-click='reward()')
+                    = fa_icon('plus')
+                  %button.btn.btn-danger(ng-click='skip()')
+                    = fa_icon('minus')
+              %b {{ rfk.status.CurrentSongMeta.Title }}
+              %span.label.label-info {{rfk.status.CurrentSong.Rank}}
+              %br
+              {{ rfk.status.CurrentSongMeta.Artist }}
+              %br
+              %i {{ rfk.status.CurrentSongMeta.Album }}
           .well
-            {{ currentTime }}
-          .well
-            .input-group
-              %span.input-group-addon
-                = fa_icon('search')
-              %input.form-control(ng-model='query' type='text')
+            %form.form-inline
+              .input-group
+                %span.input-group-addon
+                  = fa_icon('search')
+                %input.form-control(ng-model='query' type='text')
+              .input-group
+                %span.input-group-addon
+                  = fa_icon('sort')
+                %select.form-control(ng-model='orderProp')
+                  %option hash
+                  %option title
             %ul.list-group
-              %li.list-group-item(ng-repeat="song in songs | filter:query")
+              %li.list-group-item(ng-repeat="song in songs | filter:query | orderBy:orderProp")
                 {{song.hash}}
+                {{song.name}}
 
