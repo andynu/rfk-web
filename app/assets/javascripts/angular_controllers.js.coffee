@@ -27,7 +27,7 @@ app.controller 'welcomeCtrl', ['$scope','Rfk', ($scope,rfk) ->
 
 
   updateStatus()
-  setInterval updateStatus, 1000*10
+  setInterval updateStatus, 1000*1
 
   $scope.skip = -> rfk.skip()
   $scope.reward = -> rfk.reward()

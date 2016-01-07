@@ -1,7 +1,7 @@
 !!!
 %html(ng-app='welcomeApp' ng-controller='welcomeCtrl')
   %head
-    %title(ng-bind-template="angular: {{query}}") angular
+    %title(ng-bind-template="rfk: {{currentSong.Title}} / {{currentSong.Artist}}") rfk
     = javascript_include_tag 'application', debug: false
     = stylesheet_link_tag    'application', media: 'all', debug: false
 
@@ -14,10 +14,11 @@
             .panel-body
 
               .row
-                .col-xs-1
-                  %button.btn.btn-default.btn-xs
-                    = fa_icon('tag',class: 'text-muted')
-                .col-xs-11
+                /.col-xs-1
+                /  %button.btn.btn-default.btn-xs
+                /    = fa_icon('tag',class: 'text-muted')
+                /.col-xs-11
+                .col-xs-12
                   .pull-right
                     .btn-group
                       %button.btn.btn-default(ng-click='playpause()')
