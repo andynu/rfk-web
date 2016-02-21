@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'browse/index'
+
+  get 'browse/folders'
+
   mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   get 'welcome/index'
 
