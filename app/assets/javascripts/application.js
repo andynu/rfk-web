@@ -16,5 +16,7 @@
 //= require turbolinks
 //= require rfk_api
 //= require angular
+//= require unstable/angular2
 //= require angular_controllers
 //= require_tree .
+ng.platform.browser.bootstrap(app.CurrentSong);

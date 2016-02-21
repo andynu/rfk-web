@@ -1,7 +1,7 @@
 !!!
-%html(ng-app='welcomeApp' ng-controller='welcomeCtrl')
+%html
   %head
-    %title(ng-bind-template="angular: {{query}}") angular
+    %title angular2
     = javascript_include_tag 'application', debug: false
     = stylesheet_link_tag    'application', media: 'all', debug: false
 
@@ -9,73 +9,76 @@
     .container-fluid
       .row-fluid
         .col-xs-12
-          %br
-          .panel.panel-default
-            .panel-body
+          %currentsong
 
-              .row
-                .col-xs-1
-                  %button.btn.btn-default.btn-xs
-                    = fa_icon('tag',class: 'text-muted')
-                .col-xs-11
-                  .pull-right
-                    .btn-group
-                      %button.btn.btn-default(ng-click='playpause()')
-                        = fa_icon('play')
-                        = fa_icon('pause')
 
-                    .btn-group
-                      %button.btn.btn-success(ng-click='reward()')
-                        = fa_icon('thumbs-up')
-                      %button.btn.btn-danger(ng-click='skip()')
-                        = fa_icon('thumbs-down')
+          /*%br
+          /*.panel.panel-default
+          /*  .panel-body
 
-                  %b {{ currentSong.Title }}
-                  %br
-                  {{ currentSong.Artist }}
-                  %br
-                  .pull-right
-                    %span.label.label-default.bg-supermuted {{currentSong.Rank}}
-                  %i {{ currentSong.Album }}
-            .panel-footer.text-muted
-              %i Previous song
-              %br
-              %button.btn.btn-default.btn-xs
-                = fa_icon('tag',class: 'text-muted')
-              .pull-right
-                %span.label.label-default.bg-supermuted {{lastSong.Rank}}
-              %b {{ lastSong.Title }}
-              \/ 
-              {{ lastSong.Artist }}
-              \/
-              %i {{ lastSong.Album }}
+          /*    .row
+          /*      .col-xs-1
+          /*        %button.btn.btn-default.btn-xs
+          /*          = fa_icon('tag',class: 'text-muted')
+          /*      .col-xs-11
+          /*        .pull-right
+          /*          .btn-group
+          /*            %button.btn.btn-default(ng-click='playpause()')
+          /*              = fa_icon('play')
+          /*              = fa_icon('pause')
 
-          %form.form-inline
-            .input-group
-              %span.input-group-addon
-                = fa_icon('search')
-              %input.form-control(ng-model='term' type='text' ng-change="search()")
-              %span.input-group-btn
-                %button.btn.btn-default(ng-click="searchRequest()")
-                  = fa_icon('play')
-                  = fa_icon('list')
+          /*          .btn-group
+          /*            %button.btn.btn-success(ng-click='reward()')
+          /*              = fa_icon('thumbs-up')
+          /*            %button.btn.btn-danger(ng-click='skip()')
+          /*              = fa_icon('thumbs-down')
 
-          %ul.list-group
-            %li.list-group-item(ng-repeat="song in search_songs")
-              %small.text-muted.hash {{song.Hash}}
-              %span.path {{song.Path}}
+          /*        %b {{ currentSong.Title }}
+          /*        %br
+          /*        {{ currentSong.Artist }}
+          /*        %br
+          /*        .pull-right
+          /*          %span.label.label-default.bg-supermuted {{currentSong.Rank}}
+          /*        %i {{ currentSong.Album }}
+          /*  .panel-footer.text-muted
+          /*    %i Previous song
+          /*    %br
+          /*    %button.btn.btn-default.btn-xs
+          /*      = fa_icon('tag',class: 'text-muted')
+          /*    .pull-right
+          /*      %span.label.label-default.bg-supermuted {{lastSong.Rank}}
+          /*    %b {{ lastSong.Title }}
+          /*    \/ 
+          /*    {{ lastSong.Artist }}
+          /*    \/
+          /*    %i {{ lastSong.Album }}
 
-          %ul.list-group
-            %li.list-group-item
-              .pull-right
-                %button.btn.btn-default.btn-xs(ng-click="clearRequests()")
-                  Clear
-              %b Requests
-              .label.label-default
-                {{ requests.length }}
-            %li.list-group-item(ng-repeat="song in requests")
-              .pull-right
-                .label.label-default.bg-supermuted {{song.Rank}}
-              %small.text-muted.hash {{song.Hash}}
-              %span.path {{song.Path}}
+          /*%form.form-inline
+          /*  .input-group
+          /*    %span.input-group-addon
+          /*      = fa_icon('search')
+          /*    %input.form-control(ng-model='term' type='text' ng-change="search()")
+          /*    %span.input-group-btn
+          /*      %button.btn.btn-default(ng-click="searchRequest()")
+          /*        = fa_icon('play')
+          /*        = fa_icon('list')
+
+          /*%ul.list-group
+          /*  %li.list-group-item(ng-repeat="song in search_songs")
+          /*    %small.text-muted.hash {{song.Hash}}
+          /*    %span.path {{song.Path}}
+
+          /*%ul.list-group
+          /*  %li.list-group-item
+          /*    .pull-right
+          /*      %button.btn.btn-default.btn-xs(ng-click="clearRequests()")
+          /*        Clear
+          /*    %b Requests
+          /*    .label.label-default
+          /*      {{ requests.length }}
+          /*  %li.list-group-item(ng-repeat="song in requests")
+          /*    .pull-right
+          /*      .label.label-default.bg-supermuted {{song.Rank}}
+          /*    %small.text-muted.hash {{song.Hash}}
+          /*    %span.path {{song.Path}}
 

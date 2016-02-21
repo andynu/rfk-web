@@ -1,3 +1,9 @@
+GIT
+  remote: git@github.com:hiravgandhi/angularjs-rails.git
+  revision: 1d2a2d404c4dd0023347fc3f0d104c8734e718ca
+  specs:
+    angularjs-rails (1.5.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -36,7 +42,6 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.3, >= 0.3.4)
       tzinfo (~> 1.1)
-    angularjs-rails (1.4.8)
     arel (6.0.3)
     binding_of_caller (0.7.2)
       debug_inspector (>= 0.0.1)
@@ -229,7 +234,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  angularjs-rails
+  angularjs-rails!
   byebug
   coffee-rails (~> 4.1.0)
   font-awesome-rails

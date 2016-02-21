@@ -23,7 +23,7 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
-gem 'angularjs-rails'
+gem 'angularjs-rails', git: 'git@github.com:hiravgandhi/angularjs-rails.git'
 gem 'twitter-bootstrap-rails'
 gem 'haml'
 gem 'font-awesome-rails'
