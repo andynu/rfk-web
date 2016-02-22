@@ -6,6 +6,8 @@ class BrowseController < ApplicationController
   end
 
   def folders
-    #Folder.all.paginate(params[:page])
+    @folders = Folder.all.page(params[:page])
+    @folder = Folder.where(full_path: params[:path]).first
+    @songs = @folder.songs.page(params[:song_page])
   end
 end

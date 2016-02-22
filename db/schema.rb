@@ -11,7 +11,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160217000111) do
+ActiveRecord::Schema.define(version: 20160222004617) do
+
+  create_table "folder_songs", force: :cascade do |t|
+    t.integer  "folder_id"
+    t.integer  "song_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "folders", force: :cascade do |t|
+    t.integer  "parent_id"
+    t.string   "full_path"
+    t.string   "path"
+    t.integer  "songs_count"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "songs", force: :cascade do |t|
     t.string   "audio_hash"

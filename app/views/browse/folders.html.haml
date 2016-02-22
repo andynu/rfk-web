@@ -1,0 +1,33 @@
+.container-fluid
+  .row
+    .col-sm-12
+      %b folders
+
+  .row
+    .col-sm-4
+      %form
+        %input.form-control{name:'filter',type:'text',placeholder:'filter',value:params[:filter]}
+
+      = paginate @folders
+      = page_entries_info @folders
+
+      %div#search.list-group
+        - @folders.each do |folder|
+          %a.folder.list-group-item{href: "?path=#{folder.full_path}"}
+            .pull-right
+              .badge
+                = folder.songs_count
+            %b= folder.path
+          
+    .col-sm-4
+      %b songs
+      %div#songs.list-group
+        - if @folder.present?
+          - @songs.each do |song|
+            %a.song.list-group-item{data:{hash: song.audio_hash}}
+              %b= song.title
+              = song.artist
+
+    .col-sm-4
+      %b requests
+      %div#requests.list-group
