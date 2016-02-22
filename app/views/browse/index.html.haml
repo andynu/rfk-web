@@ -1,0 +1,22 @@
+.container-fluid
+  .row
+    .col-sm-12
+      %b songs
+
+  .row
+    .col-sm-6
+      %form
+        %input.form-control{name:'filter',type:'text',placeholder:'filter',value:params[:filter]}
+
+      = paginate @songs
+      = page_entries_info @songs
+
+      %div#search.list-group
+        - @songs.each do |song|
+          %a.song.list-group-item{data:{hash: song.audio_hash}}
+            %b= song.title
+            = song.artist
+          
+    .col-sm-6
+      %b requests
+      %div#requests.list-group

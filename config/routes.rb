@@ -1,9 +1,9 @@
 Rails.application.routes.draw do
-  get 'browse/index'
 
+  get 'browse' => 'browse#index'
   get 'browse/folders'
 
-  mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
+  #mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   get 'welcome/index'
 
   # The priority is based upon order of creation: first created -> highest priority.

@@ -27,6 +27,9 @@ gem 'angularjs-rails'
 gem 'twitter-bootstrap-rails'
 gem 'haml'
 gem 'font-awesome-rails'
+gem 'kaminari', '~> 0.16.3'
+gem 'quiet_assets'
+gem 'scoped_search', '~> 3.2.2'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
