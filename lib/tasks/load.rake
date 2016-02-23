@@ -1,5 +1,15 @@
 require 'csv'
 namespace :load do
+
+  desc <<-DESC
+  Load everything!!!
+  DESC
+  task :all => :environment do
+    Rake::Task["load:songs"].invoke
+    Rake::Task["load:folders"].invoke
+  end
+
+
   desc <<-DESC
   load data/song_hashes.csv into Song records
 
