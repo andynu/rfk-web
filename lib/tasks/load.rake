@@ -17,18 +17,24 @@ namespace :load do
   audio_hash, path, artist, album, title
   DESC
   task :songs => :environment do
+    Song.delete_all
     CSV.open('data/song_hashes.csv').each do |row|
       audio_hash, path, artist, album, title = row
 
-      song = Song.new(
-        audio_hash: audio_hash,
-        path: path,
-        artist: artist,
-        album: album,
-        title: title
-      )
+      begin
+        song = Song.new(
+          audio_hash: audio_hash,
+          path: path,
+          artist: artist,
+          album: album,
+          title: title
+        )
 
-      song.save!
+        song.save!
+      rescue StandardError => e
+        warn song.attributes
+        warn e
+      end
     end
   end
 
