@@ -16,3 +16,6 @@
 !/log/.keep
 /tmp
 data
+.idea
+.ruby-version
+config/database.yml

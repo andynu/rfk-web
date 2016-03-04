@@ -2,11 +2,19 @@
 %html(ng-app='welcomeApp' ng-controller='welcomeCtrl')
   %head
     %title(ng-bind-template="rfk: {{currentSong.Title}} / {{currentSong.Artist}}") rfk
+    %meta(name="viewport" content="width=device-width, initial-scale=1")
     = javascript_include_tag 'application', debug: false
     = stylesheet_link_tag    'application', media: 'all', debug: false
 
   %body
     .container-fluid
+      .row-fluid
+        .col-xs-12
+          %ul.nav.nav-pills
+            %li
+              = link_to "rfk", :root
+            %li
+              = link_to "browse", browse_path
       .row-fluid
         .col-xs-12
           %br
@@ -20,17 +28,28 @@
                 /.col-xs-11
                 .col-xs-12
                   .pull-right
-                    .btn-group
+                    .btn-group.hidden-xs
                       %button.btn.btn-default(ng-click='playpause()')
-                        = fa_icon('play')
-                        = fa_icon('pause')
+                        = icon('play')
+                        = icon('pause')
 
-                    .btn-group
+                    .btn-group.hidden-xs
                       %button.btn.btn-success(ng-click='reward()')
-                        = fa_icon('thumbs-up')
+                        = icon('thumbs-up')
                       %button.btn.btn-danger(ng-click='skip()')
-                        = fa_icon('thumbs-down')
+                        = icon('thumbs-down')
 
+                  .btn-group.visible-xs
+                    %button.btn.btn-xlarge.btn-default(ng-click='playpause()')
+                      = icon('play')
+                      = icon('pause')
+
+                  .btn-group.visible-xs
+                    %button.btn.btn-xlarge.btn-success(ng-click='reward()')
+                      = icon('thumbs-up')
+                    %button.btn.btn-xlarge.btn-danger(ng-click='skip()')
+                      = icon('thumbs-down')
+                  %hr.clear.visible-xs
                   %b {{ currentSong.Title }}
                   %br
                   {{ currentSong.Artist }}
@@ -42,7 +61,7 @@
               %i Previous song
               %br
               %button.btn.btn-default.btn-xs
-                = fa_icon('tag',class: 'text-muted')
+                = icon('tag',class: 'text-muted')
               .pull-right
                 %span.label.label-default.bg-supermuted {{lastSong.Rank}}
               %b {{ lastSong.Title }}
@@ -54,12 +73,12 @@
           %form.form-inline
             .input-group
               %span.input-group-addon
-                = fa_icon('search')
+                = icon('search')
               %input.form-control(ng-model='term' type='text' ng-change="search()")
               %span.input-group-btn
                 %button.btn.btn-default(ng-click="searchRequest()")
-                  = fa_icon('play')
-                  = fa_icon('list')
+                  = icon('play')
+                  = icon('list')
 
           %ul.list-group
             %li.list-group-item(ng-repeat="song in search_songs")

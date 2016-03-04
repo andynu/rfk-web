@@ -6,8 +6,13 @@ class BrowseController < ApplicationController
   end
 
   def folders
-    @folders = Folder.all.page(params[:page])
     @folder = Folder.where(full_path: params[:path]).first
-    @songs = @folder.songs.page(params[:song_page])
+
+    @folders = Folder.order('depth asc, path asc')
+    @folders = @folders.where('full_path like ?', "#{params[:path]}%").where(depth: @folder.depth+1) if @folder.present?
+    @folders = @folders.page(params[:page])
+    if @folder
+      @songs = @folder.songs.page(params[:song_page])
+    end
   end
 end

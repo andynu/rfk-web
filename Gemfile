@@ -3,8 +3,10 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+
+gem 'sqlite3' # Use sqlite3 as the database for Active Record
+gem 'mysql2' # Use mysql as the database for Active Record
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -26,8 +28,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'angularjs-rails'
 gem 'twitter-bootstrap-rails'
 gem 'haml'
-gem 'font-awesome-rails'
+gem 'font-awesome-sass', '~> 4.5.0'
 gem 'kaminari', '~> 0.16.3'
+gem 'kaminari-bootstrap', '~> 3.0.1'
 gem 'quiet_assets'
 gem 'scoped_search', '~> 3.2.2'
 

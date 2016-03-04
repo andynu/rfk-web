@@ -1,6 +1,15 @@
 .container-fluid
   .row
     .col-sm-12
+      %br
+      %ul.nav.nav-tabs
+        %li.active
+          = link_to "Songs", browse_path
+        %li
+          = link_to "Folders", browse_folders_path
+
+  .row
+    .col-sm-12
       %b songs
 
   .row
