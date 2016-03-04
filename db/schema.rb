@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160222004617) do
+ActiveRecord::Schema.define(version: 20160303014401) do
 
   create_table "folder_songs", force: :cascade do |t|
     t.integer  "folder_id"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20160222004617) do
     t.integer  "songs_count"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "depth"
   end
 
   create_table "songs", force: :cascade do |t|
