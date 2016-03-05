@@ -1,31 +1,65 @@
 .container-fluid
   .row
     .col-sm-12
-      %br
-      %ul.nav.nav-tabs
-        %li.active
-          = link_to "Songs", browse_path
-        %li
-          = link_to "Folders", browse_folders_path
+
+      %ol.breadcrumb
+        - pparts = params[:path].split(/\//) rescue [:root]
+        - pparts.shift
+        - path_agg = ""
+        - pparts.each do |ppath|
+          - path_agg +=  "/" + ppath
+          %li= link_to ppath, "?path="+path_agg
 
   .row
-    .col-sm-12
-      %b songs
+    .col-sm-4
+      .panel.panel-default
+        .panel-heading
+          .pull-right
+            %a.btn.btn-default.btn-xs{href:'#folder_filters',data:{toggle:'collapse'}}
+              = icon('filter')
+          %a{href:'#folders',data:{toggle:'collapse'}} folders
 
-  .row
-    .col-sm-6
-      %form
-        %input.form-control{name:'filter',type:'text',placeholder:'filter',value:params[:filter]}
+        #folders.collapse.in
+          .panel-body
+            #folder_filters.collapse
+              %form
+                %input.form-control{name:'filter',type:'text',placeholder:'filter',value:params[:filter]}
+            = page_entries_info @folders
 
-      = paginate @songs
-      = page_entries_info @songs
+          = paginate @folders
 
-      %div#search.list-group
-        - @songs.each do |song|
-          %a.song.list-group-item{data:{hash: song.audio_hash}}
-            %b= song.title
-            = song.artist
+          %div#search.list-group
+            - @folders.each do |folder|
+              %a.folder.list-group-item{href: "?path=#{folder.full_path}"}
+                .pull-right
+                  .badge
+                    = folder.songs_count
+                %b= folder.path
+          = paginate @folders
           
-    .col-sm-6
+    .col-sm-4
+      .panel.panel-default
+        .panel-heading
+          .pull-right
+            %label
+              %input{type:'checkbox'}
+              Recursive
+            %a.btn.btn-default.btn-xs{href:'#song_filters',data:{toggle:'collapse'}}
+              = icon('filter')
+          %a{href:'#songs',data:{toggle:'collapse'}} songs
+        #songs.collapse.in
+          #song_filters.panel-body.collapse
+            %input.form-control{name:'filter',type:'text',placeholder:'filter',value:params[:filter]}
+          %div#songs.list-group
+            - if @songs.present?
+              %a.request-all.list-group-item.list-group-item-warning
+                %b request all
+              - @songs.each do |song|
+                %a.song.list-group-item{data:{hash: song.audio_hash}}
+                  .pull-right
+                    = song.artist
+                  %b= song.title
+
+    .col-sm-4
       %b requests
       %div#requests.list-group

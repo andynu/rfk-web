@@ -1,18 +1,16 @@
 class BrowseController < ApplicationController
   def index
-    @songs = Song.all
-    @songs = @songs.search_for(params[:filter]) if params[:filter].present?
-    @songs = @songs.page(params[:page])
-  end
-
-  def folders
     @folder = Folder.where(full_path: params[:path]).first
+    @folder ||= Folder.order('depth asc').limit(1).first
+    logger.info @folder.inspect
+    depth = @folder.depth || 0
+    path = @folder.full_path || ''
 
-    @folders = Folder.order('depth asc, path asc')
-    @folders = @folders.where('full_path like ?', "#{params[:path]}%").where(depth: @folder.depth+1) if @folder.present?
-    @folders = @folders.page(params[:page])
-    if @folder
-      @songs = @folder.songs.page(params[:song_page])
-    end
+    @folders = Folder.order('depth asc, path asc')\
+              .where('full_path like ?', "#{path}%")\
+              .where(depth: depth+1)\
+              .page(params[:folder_page] || 0)
+
+    @songs = @folder.songs.page(params[:song_page])
   end
 end

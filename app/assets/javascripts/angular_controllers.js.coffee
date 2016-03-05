@@ -32,7 +32,7 @@ app.controller 'welcomeCtrl', ['$scope','Rfk', ($scope,rfk) ->
   $scope.skip = -> rfk.skip()
   $scope.reward = -> rfk.reward()
   $scope.playpause = -> rfk.playpause()
-  $scope.clearRequests = -> 
+  $scope.clearRequests = ->
     rfk.clearRequests()
     $scope.requests = []
   
@@ -85,6 +85,11 @@ app.factory 'Rfk', ['$http', ($http) ->
       data = {term: term}
       params = {params: data}
       return $http.get("#{@baseUrl}/searchRequest", params)
+
+    pathRequest: (term) ->
+      data = {term: term}
+      params = {params: data}
+      return $http.get("#{@baseUrl}/pathRequest", params)
 
     requests: (params) ->
       # {term:, limit:}
