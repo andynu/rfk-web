@@ -63,7 +63,7 @@ app.controller 'welcomeCtrl', ['$scope','Rfk', ($scope,rfk) ->
 app.factory 'Rfk', ['$http', ($http) ->
   new class Rfk
     constructor: ->
-      @baseUrl = 'http://localhost:7778'
+      @baseUrl = "http://#{window.location.hostname}:7778"
 
     skip: ->
       $http.post("#{@baseUrl}/skip")
@@ -86,11 +86,6 @@ app.factory 'Rfk', ['$http', ($http) ->
       params = {params: data}
       return $http.get("#{@baseUrl}/searchRequest", params)
 
-    pathRequest: (term) ->
-      data = {term: term}
-      params = {params: data}
-      return $http.get("#{@baseUrl}/pathRequest", params)
-
     requests: (params) ->
       # {term:, limit:}
       return $http.get("#{@baseUrl}/requests")
@@ -99,3 +94,6 @@ app.factory 'Rfk', ['$http', ($http) ->
       $http.get("#{@baseUrl}/clearRequests")
 
 ]
+
+host = () ->
+  window.location.hostname

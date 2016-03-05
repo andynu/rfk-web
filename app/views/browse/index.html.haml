@@ -52,10 +52,10 @@
             %input.form-control{name:'filter',type:'text',placeholder:'filter',value:params[:filter]}
           %div#songs.list-group
             - if @songs.present?
-              %a.request-all.list-group-item.list-group-item-warning
+              %a.request-all.list-group-item.list-group-item-warning{data:{path: @folder.full_path}}
                 %b request all
               - @songs.each do |song|
-                %a.song.list-group-item{data:{hash: song.audio_hash}}
+                %a.song.list-group-item{data:{hash: song.audio_hash, path: song.path}}
                   .pull-right
                     = song.artist
                   %b= song.title

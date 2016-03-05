@@ -4,14 +4,15 @@
 $ ->
   $('#search').on 'dblclick', '.song', (e) ->
     $.ajax
-      url: 'http://localhost:7778/request'
+      url: "http://#{host()}:7778/request"
       data:
         hash: $(this).data('hash')
       success: (data) ->
         console.log data
+
   if $('requests').length
     $.ajax
-      url: 'http://localhost:7778/requests'
+      url: "http://#{host()}:7778/requests"
       success: (data) ->
         console.log data
 
@@ -35,18 +36,31 @@ $ ->
   
   ## doubletap
   # one song
-  $("a.song.list-group-item").on 'dblclick', ->
+  $("a.song.list-group-item").on 'click', ->
     if $(this).find(".request").length == 0
       $(this).prepend("<div class='request pull-right'>&nbsp;<i class='fa fa-list'></i></div>")
-    else
-      $(this).find(".request").remove()
+      requestByPath($(this).data('path'))
+      #else
+      #$(this).find(".request").remove()
 
   # all
-  $("a.request-all.list-group-item").on 'dblclick', ->
+  $("a.request-all.list-group-item").on 'click', ->
     if $(this).find(".request").length == 0
       items = $(this).parents('.list-group').find('.list-group-item')
       items.find(".request").remove()
       items.prepend("<div class='request pull-right'>&nbsp;<i class='fa fa-list'></i></div>")
-    else
-      items = $(this).parents('.list-group').find('.list-group-item')
-      items.find(".request").remove()
+      requestByPath($(this).data('path'))
+      #else
+      #elitems = $(this).parents('.list-group').find('.list-group-item')
+      #elitems.find(".request").remove()
+
+host = () ->
+  window.location.hostname
+
+requestByPath = (path) ->
+  $.ajax
+    url: "http://#{host()}:7778/searchRequest",
+    data:
+      term: path
+    success: (data) ->
+      console.log data
