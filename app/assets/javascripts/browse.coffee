@@ -40,8 +40,9 @@ $ ->
     if $(this).find(".request").length == 0
       $(this).prepend("<div class='request pull-right'>&nbsp;<i class='fa fa-list'></i></div>")
       requestByPath($(this).data('path'))
-      #else
-      #$(this).find(".request").remove()
+    else
+      $(this).find(".request").remove()
+      unrequestByPath($(this).data('path'))
 
   # all
   $("a.request-all.list-group-item").on 'click', ->
@@ -50,9 +51,10 @@ $ ->
       items.find(".request").remove()
       items.prepend("<div class='request pull-right'>&nbsp;<i class='fa fa-list'></i></div>")
       requestByPath($(this).data('path'))
-      #else
-      #elitems = $(this).parents('.list-group').find('.list-group-item')
-      #elitems.find(".request").remove()
+    else
+      elitems = $(this).parents('.list-group').find('.list-group-item')
+      elitems.find(".request").remove()
+      unrequestByPath($(this).data('path'))
 
 host = () ->
   window.location.hostname
@@ -60,6 +62,14 @@ host = () ->
 requestByPath = (path) ->
   $.ajax
     url: "http://#{host()}:7778/searchRequest",
+    data:
+      term: path
+    success: (data) ->
+      console.log data
+
+unrequestByPath = (path) ->
+  $.ajax
+    url: "http://#{host()}:7778/searchUnrequest",
     data:
       term: path
     success: (data) ->
