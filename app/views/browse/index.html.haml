@@ -3,11 +3,7 @@
     .col-sm-12
 
       %ol.breadcrumb
-        - pparts = params[:path].split(/\//) rescue [:root]
-        - pparts.shift
-        - path_agg = ""
-        - pparts.each do |ppath|
-          - path_agg +=  "/" + ppath
+        - @path_parts.each do |ppath, path_agg|
           %li= link_to ppath, "?path="+path_agg
 
   .row
@@ -24,9 +20,21 @@
             #folder_filters.collapse
               %form
                 %input.form-control{name:'filter',type:'text',placeholder:'filter',value:params[:filter]}
-            = page_entries_info @folders
 
-          = paginate @folders
+            %table
+              %tr
+                %td
+                  - last_path = @path_parts[-2].try(:second)
+                  - if last_path.present?
+                    = link_to icon('arrow-left'), "?path="+last_path, class: 'btn btn-default'
+                %td
+                  &nbsp;
+                  = page_entries_info @folders
+
+          /.btn-group
+          /  - ('A'..'z').each do |l|
+          /    %a.btn.btn-default{href:'#'}= l
+          = paginate @folders, param_name: :folder_page
 
           %div#search.list-group
             - @folders.each do |folder|

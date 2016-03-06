@@ -34,12 +34,12 @@ $ ->
   $("a.song.list-group-item").on 'click', ->
     if $(this).find(".request").length == 0
       $(this).prepend("<div class='request pull-right'>&nbsp;<i class='fa fa-list'></i></div>")
-      app.rfk.requestByPath($(this).data('path'))
-      app.requests.load()
+      app.rfk.requestByPath $(this).data('path'), ->
+        app.requests.load()
     else
       $(this).find(".request").remove()
-      app.rfk.unrequestByPath($(this).data('path'))
-      app.requests.load()
+      app.rfk.unrequestByPath $(this).data('path'), ->
+        app.requests.load()
 
   # all
   $("a.request-all.list-group-item").on 'click', ->
@@ -47,13 +47,13 @@ $ ->
       items = $(this).parents('.list-group').find('.list-group-item')
       items.find(".request").remove()
       items.prepend("<div class='request pull-right'>&nbsp;<i class='fa fa-list'></i></div>")
-      rfk.requestByPath($(this).data('path'))
-      app.requests.load()
+      app.rfk.requestByPath $(this).data('path'), ->
+        app.requests.load()
     else
       elitems = $(this).parents('.list-group').find('.list-group-item')
       elitems.find(".request").remove()
-      app.rfk.unrequestByPath($(this).data('path'))
-      app.requests.load()
+      app.rfk.unrequestByPath $(this).data('path'), ->
+        app.requests.load()
 
 class Requests
   load: ->
