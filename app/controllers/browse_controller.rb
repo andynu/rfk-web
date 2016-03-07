@@ -1,7 +1,7 @@
 class BrowseController < ApplicationController
   def index
     @folder = Folder.where(full_path: params[:path]).first
-    @folder ||= Folder.order('depth asc').limit(1).first
+    @folder ||= Folder.order('songs_count desc, depth desc').limit(1).first
     logger.info @folder.inspect
     depth = @folder.depth || 0
     path = @folder.full_path || ''
