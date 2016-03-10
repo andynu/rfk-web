@@ -3,7 +3,6 @@
   %head
     %title(ng-bind-template="rfk: {{currentSong.Title}} / {{currentSong.Artist}}") rfk
     %meta(name="viewport" content="width=device-width, initial-scale=1")
-    = javascript_include_tag 'application', debug: false
     = stylesheet_link_tag    'application', media: 'all', debug: false
 
   %body
@@ -98,4 +97,5 @@
                 .label.label-default.bg-supermuted {{song.Rank}}
               %small.text-muted.hash {{song.Hash}}
               %span.path {{song.Path}}
-
+#example
+= javascript_include_tag 'application', debug: false

@@ -14,30 +14,30 @@
 ActiveRecord::Schema.define(version: 20160303014401) do
 
   create_table "folder_songs", force: :cascade do |t|
-    t.integer  "folder_id"
-    t.integer  "song_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "folder_id",  limit: 4
+    t.integer  "song_id",    limit: 4
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "folders", force: :cascade do |t|
-    t.integer  "parent_id"
-    t.string   "full_path"
-    t.string   "path"
-    t.integer  "songs_count"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "depth"
+    t.integer  "parent_id",   limit: 4
+    t.string   "full_path",   limit: 255
+    t.string   "path",        limit: 255
+    t.integer  "songs_count", limit: 4
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "depth",       limit: 4
   end
 
   create_table "songs", force: :cascade do |t|
-    t.string   "audio_hash"
-    t.string   "path"
-    t.string   "artist"
-    t.string   "album"
-    t.string   "title"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "audio_hash", limit: 255
+    t.string   "path",       limit: 255
+    t.string   "artist",     limit: 255
+    t.string   "album",      limit: 255
+    t.string   "title",      limit: 255
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
 end

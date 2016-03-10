@@ -15,7 +15,6 @@
 //# require jquery.event.move
 //# require jquery.event.swipe
 //= require twitter/bootstrap
-//= require turbolinks
 //= require rfk_api
 //= require angular
 //= require angular_controllers
