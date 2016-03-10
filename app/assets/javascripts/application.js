@@ -19,4 +19,7 @@
 //= require rfk_api
 //= require angular
 //= require angular_controllers
+//= require react
+//= require react_ujs
+//= require components
 //= require_tree .
