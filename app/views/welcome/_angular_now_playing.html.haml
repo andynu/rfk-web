@@ -1,0 +1,51 @@
+.panel.panel-default(ng-app='welcomeApp' ng-controller='welcomeCtrl')
+  .panel-body
+
+    .row
+      /.col-xs-1
+      /  %button.btn.btn-default.btn-xs
+      /    = fa_icon('tag',class: 'text-muted')
+      /.col-xs-11
+      .col-xs-12
+        .pull-right
+          .btn-group.hidden-xs
+            %button.btn.btn-default(ng-click='playpause()')
+              = icon('play')
+              = icon('pause')
+
+          .btn-group.hidden-xs
+            %button.btn.btn-success(ng-click='reward()')
+              = icon('thumbs-up')
+            %button.btn.btn-danger(ng-click='skip()')
+              = icon('thumbs-down')
+
+        .btn-group.visible-xs
+          %button.btn.btn-xlarge.btn-default(ng-click='playpause()')
+            = icon('play')
+            = icon('pause')
+
+        .btn-group.visible-xs
+          %button.btn.btn-xlarge.btn-success(ng-click='reward()')
+            = icon('thumbs-up')
+          %button.btn.btn-xlarge.btn-danger(ng-click='skip()')
+            = icon('thumbs-down')
+        %hr.clear.visible-xs
+        %b {{ currentSong.Title }}
+        %br
+        {{ currentSong.Artist }}
+        %br
+        .pull-right
+          %span.label.label-default.bg-supermuted {{currentSong.Rank}}
+        %i {{ currentSong.Album }}
+  .panel-footer.text-muted
+    %i Previous song
+    %br
+    %button.btn.btn-default.btn-xs
+      = icon('tag',class: 'text-muted')
+    .pull-right
+      %span.label.label-default.bg-supermuted {{lastSong.Rank}}
+    %b {{ lastSong.Title }}
+    \/ 
+    {{ lastSong.Artist }}
+    \/
+    %i {{ lastSong.Album }}

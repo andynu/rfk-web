@@ -1,0 +1,13 @@
+%ul.list-group
+  %li.list-group-item
+    .pull-right
+      %button.btn.btn-default.btn-xs(ng-click="clearRequests()")
+        Clear
+    %b Requests
+    .label.label-default
+      {{ requests.length }}
+  %li.list-group-item(ng-repeat="song in requests")
+    .pull-right
+      .label.label-default.bg-supermuted {{song.Rank}}
+    %small.text-muted.hash {{song.Hash}}
+    %span.path {{song.Path}}

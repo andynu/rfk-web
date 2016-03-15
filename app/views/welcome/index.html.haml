@@ -1,5 +1,5 @@
 !!!
-%html(ng-app='welcomeApp' ng-controller='welcomeCtrl')
+%html
   %head
     %title(ng-bind-template="rfk: {{currentSong.Title}} / {{currentSong.Artist}}") rfk
     %meta(name="viewport" content="width=device-width, initial-scale=1")
@@ -17,85 +17,8 @@
       .row-fluid
         .col-xs-12
           %br
-          .panel.panel-default
-            .panel-body
-
-              .row
-                /.col-xs-1
-                /  %button.btn.btn-default.btn-xs
-                /    = fa_icon('tag',class: 'text-muted')
-                /.col-xs-11
-                .col-xs-12
-                  .pull-right
-                    .btn-group.hidden-xs
-                      %button.btn.btn-default(ng-click='playpause()')
-                        = icon('play')
-                        = icon('pause')
-
-                    .btn-group.hidden-xs
-                      %button.btn.btn-success(ng-click='reward()')
-                        = icon('thumbs-up')
-                      %button.btn.btn-danger(ng-click='skip()')
-                        = icon('thumbs-down')
-
-                  .btn-group.visible-xs
-                    %button.btn.btn-xlarge.btn-default(ng-click='playpause()')
-                      = icon('play')
-                      = icon('pause')
-
-                  .btn-group.visible-xs
-                    %button.btn.btn-xlarge.btn-success(ng-click='reward()')
-                      = icon('thumbs-up')
-                    %button.btn.btn-xlarge.btn-danger(ng-click='skip()')
-                      = icon('thumbs-down')
-                  %hr.clear.visible-xs
-                  %b {{ currentSong.Title }}
-                  %br
-                  {{ currentSong.Artist }}
-                  %br
-                  .pull-right
-                    %span.label.label-default.bg-supermuted {{currentSong.Rank}}
-                  %i {{ currentSong.Album }}
-            .panel-footer.text-muted
-              %i Previous song
-              %br
-              %button.btn.btn-default.btn-xs
-                = icon('tag',class: 'text-muted')
-              .pull-right
-                %span.label.label-default.bg-supermuted {{lastSong.Rank}}
-              %b {{ lastSong.Title }}
-              \/ 
-              {{ lastSong.Artist }}
-              \/
-              %i {{ lastSong.Album }}
-
-          %form.form-inline
-            .input-group
-              %span.input-group-addon
-                = icon('search')
-              %input.form-control(ng-model='term' type='text' ng-change="search()")
-              %span.input-group-btn
-                %button.btn.btn-default(ng-click="searchRequest()")
-                  = icon('play')
-                  = icon('list')
-
-          %ul.list-group
-            %li.list-group-item(ng-repeat="song in search_songs")
-              %small.text-muted.hash {{song.Hash}}
-              %span.path {{song.Path}}
-
-          %ul.list-group
-            %li.list-group-item
-              .pull-right
-                %button.btn.btn-default.btn-xs(ng-click="clearRequests()")
-                  Clear
-              %b Requests
-              .label.label-default
-                {{ requests.length }}
-            %li.list-group-item(ng-repeat="song in requests")
-              .pull-right
-                .label.label-default.bg-supermuted {{song.Rank}}
-              %small.text-muted.hash {{song.Hash}}
-              %span.path {{song.Path}}
-#example
+          /= render partial: 'angular_now_playing'
+          /= render partial: 'angular_search'
+          /= render partial: 'angular_requests'
+          = react_component('NowPlaying', { pollInterval: 500 })
 = javascript_include_tag 'application', debug: false
