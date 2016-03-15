@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160303014401) do
+ActiveRecord::Schema.define(version: 20160307153145) do
 
   create_table "folder_songs", force: :cascade do |t|
     t.integer  "folder_id",  limit: 4
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 20160303014401) do
 
   create_table "songs", force: :cascade do |t|
     t.string   "audio_hash", limit: 255
-    t.string   "path",       limit: 255
+    t.string   "path",       limit: 512
     t.string   "artist",     limit: 255
     t.string   "album",      limit: 255
     t.string   "title",      limit: 255
