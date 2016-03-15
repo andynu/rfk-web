@@ -43,7 +43,8 @@
                   .badge
                     = folder.songs_count
                 %b= folder.path
-          = paginate @folders
+
+          = paginate @folders, param_name: :folder_page
           
     .col-sm-4
       .panel.panel-default
