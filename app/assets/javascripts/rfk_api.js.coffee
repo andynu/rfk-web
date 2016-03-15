@@ -4,5 +4,11 @@ class Rfk
   status: (callback) ->
     $.getJSON "#{this.baseurl}/status", (data) ->
       callback(data)
+  reward: () ->
+    $.getJSON "#{this.baseurl}/reward"
+  skip: () ->
+    $.getJSON "#{this.baseurl}/skip"
+  playpause: () ->
+    $.getJSON "#{this.baseurl}/playpause"
 
 window.rfk = new Rfk

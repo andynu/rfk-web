@@ -20,5 +20,6 @@
           /= render partial: 'angular_now_playing'
           /= render partial: 'angular_search'
           /= render partial: 'angular_requests'
-          = react_component('NowPlaying', { pollInterval: 500 })
+          = react_component('PlayerControls')
+          = react_component('NowPlaying')
 = javascript_include_tag 'application', debug: false
