@@ -7,10 +7,13 @@
     window.rfk.playpause()
 
   render: ->
+    switch this.props.player_state
+      when 'playing' then playpause = `<i className='fa fa-pause' />`
+      when 'paused' then playpause = `<i className='fa fa-play' />`
+
     `<div className='player_controls'>
       <div className='btn btn-default' onClick={this.handlePause}>
-        <i className='fa fa-play' />
-        <i className='fa fa-pause' />
+        {playpause}
       </div>
       <div className='btn btn-default' onClick={this.handleReward}>
         <i className='fa fa-thumbs-o-up' /> reward
