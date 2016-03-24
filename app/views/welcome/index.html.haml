@@ -1,25 +1,11 @@
 !!!
 %html
   %head
-    %title(ng-bind-template="rfk: {{currentSong.Title}} / {{currentSong.Artist}}") rfk
+    %title rfk
     %meta(name="viewport" content="width=device-width, initial-scale=1")
     = stylesheet_link_tag    'application', media: 'all', debug: false
-
   %body
     .container-fluid
-      .row-fluid
-        .col-xs-12
-          %ul.nav.nav-pills
-            %li
-              = link_to "rfk", :root
-            %li
-              = link_to "browse", browse_path
-      .row-fluid
-        .col-xs-12
-          %br
-          /= render partial: 'angular_now_playing'
-          /= render partial: 'angular_search'
-          /= render partial: 'angular_requests'
-          = react_component('PlayerControls')
-          = react_component('NowPlaying')
+      #player
+
 = javascript_include_tag 'application', debug: false

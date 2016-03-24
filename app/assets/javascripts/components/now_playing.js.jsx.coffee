@@ -1,24 +1,17 @@
 @NowPlaying = React.createClass
-  fetch: ->
-    window.rfk.status (data) =>
-      this.setProps
-        title: data.CurrentSongMeta.Title
-        artist: data.CurrentSongMeta.Artist
-        album: data.CurrentSongMeta.Album
-        rank: data.CurrentSong.Rank
-
-  componentDidMount: ->
-    console.log this
-    this.fetch()
-    setInterval(this.fetch, 1000)
-
   getInitialState: ->
-    return { title: '' }
-
+    {song: {
+      rank: '',
+      title: '',
+      artist: '',
+      album: ''
+    }}
   render: ->
-    `<div className='song'>
-      <div className='rank'>{this.props.rank}</div>
-      <div className='title'>{this.props.title}</div>
-      <div className='artist'>{this.props.artist}</div>
-      <div className='album'>{this.props.album}</div>
-    </div>`
+    if this.props.song
+      return `<div className='song'>
+                <div className='rank'>{this.props.song.rank}</div>
+                <div className='title'>{this.props.song.title}</div>
+                <div className='artist'>{this.props.song.artist}</div>
+                <div className='album'>{this.props.song.album}</div>
+              </div>`
+    return `<div />`
