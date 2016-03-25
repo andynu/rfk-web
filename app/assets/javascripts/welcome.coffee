@@ -6,11 +6,14 @@
   connection_status: false
   player_state: 'paused'
   folders: []
+  songs: []
+  request_hashes: []
 
 $ ->
   now_playing()
-  #setInterval now_playing, 1000
-
+  setInterval now_playing, 1000
+  requests()
+  setInterval requests, 5000
   window.folder_search(null)
 
 now_playing = () ->
@@ -25,12 +28,23 @@ now_playing = () ->
 
     rerender()
 
+requests = () ->
+  window.rfk.requests (requests) =>
+    @state.request_hashes = []
+    for song in requests
+      @state.request_hashes.push song.Hash
+    rerender()
+
 window.folder_search = (path) ->
-  window.browse.folders {path: path}, (folders) ->
-    @state.folders = folders
+  window.browse.folders {path: path}, (data) ->
+    console.log data
+    @state.folders = data.folders
+    @state.songs = data.songs
     rerender()
 
 rerender = ->
   ReactDOM.render(
     React.createElement(Player, @state ),
     document.getElementById('player'))
+ 
+window.rerender = rerender
