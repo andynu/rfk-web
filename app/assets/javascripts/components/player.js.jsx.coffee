@@ -12,7 +12,10 @@
         </div>
         <div className='row'>
           <div className='col-xs-12'>
-            <FilteredFolderList folders={this.props.folders} songs={this.props.songs} />
+            <FilteredFolderList 
+              folders={this.props.folders} 
+              songs={this.props.songs} 
+              request_count={this.props.request_count} />
           </div>
         </div>
     </div>

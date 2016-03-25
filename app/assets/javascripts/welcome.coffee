@@ -8,6 +8,7 @@
   folders: []
   songs: []
   request_hashes: []
+  paths: []
 
 $ ->
   now_playing()
@@ -33,6 +34,18 @@ requests = () ->
     @state.request_hashes = []
     for song in requests
       @state.request_hashes.push song.Hash
+    @state.request_count = @state.request_hashes.length
+    rerender()
+
+window.clear_requests = (path) ->
+  window.rfk.clearRequests () =>
+    @state.request_hashes = []
+    @state.request_count = 0
+    rerender()
+
+window.request_path = (path) ->
+  window.rfk.requestByPath path, (data) ->
+    console.log data
     rerender()
 
 window.folder_search = (path) ->
@@ -41,6 +54,15 @@ window.folder_search = (path) ->
     @state.folders = data.folders
     @state.songs = data.songs
     rerender()
+
+window.push_path = (path) ->
+  @state.paths.push path
+  rerender()
+
+window.pop_path = () ->
+  path = @state.paths.pop()
+  rerender()
+  path
 
 rerender = ->
   ReactDOM.render(

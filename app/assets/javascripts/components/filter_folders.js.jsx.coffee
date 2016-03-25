@@ -1,3 +1,14 @@
+@UpDir = React.createClass
+  handleClick: (e) ->
+    window.folder_search window.pop_path()
+
+  render: ->
+    `<div className='folder list-group-item' onClick={this.handleClick}>
+      <i className='fa fa-music text-muted' />
+      &nbsp;
+      ...
+      </div>`
+
 @Song = React.createClass
   handleClick: (e) ->
     window.rfk.request this.props.song.audio_hash, (requests) ->
@@ -18,12 +29,22 @@
       </div>`
 
 @Folder = React.createClass
-  handleClick: (e) ->
+  cwd: (e) ->
+    window.push_path this.props.folder.full_path
     window.folder_search this.props.folder.full_path
+  requestPath: (e) ->
+    e.preventDefault()
+    e.stopPropagation()
+    window.request_path this.props.folder.full_path
   render: ->
-    `<div className='folder list-group-item' onClick={this.handleClick}>
+    request_badge = `<div className='btn btn-default btn-xs' onClick={this.requestPath}>
+      <i className='fa fa-list' />
+      </div>`
+
+    `<div className='folder list-group-item' onClick={this.cwd}>
       <i className='fa fa-folder text-muted' />
       &nbsp;
+      <div className='pull-right'>{request_badge}</div>
       {this.props.folder.path}
       </div>`
 
@@ -36,6 +57,8 @@
      </div>`
 
 @FilteredFolderList = React.createClass
+  clearRequests: (e) ->
+    window.clear_requests()
   render: ->
     folders = `<div/>`
     if this.props.folders.length > 0
@@ -51,12 +74,18 @@
 
     `<div className='panel panel-default'>
       <div className='panel-heading'>
+      <div className='pull-right'>
+        <div className='badge'>{this.props.request_count}</div>
+        <div className='btn btn-default btn-xs' onClick={this.clearRequests}>
+          <i className='fa fa-list' />
+          <i className='fa fa-times' />
+        </div>
+      </div>
       <FolderFilter />
       </div>
-      <div className='panel-body'>
-        <div className='list-group'>
-          {folders}
-          {songs}
-        </div>
+      <div className='list-group'>
+        <UpDir />
+        {folders}
+        {songs}
       </div>
     </div>`
