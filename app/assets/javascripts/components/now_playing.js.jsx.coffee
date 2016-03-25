@@ -1,14 +1,12 @@
 @NowPlaying = React.createClass
   getInitialState: ->
-    {
       connnection_status: false,
-      song: {
+      song:
         rank: '',
         title: '',
         artist: '',
         album: ''
-      }
-    }
+
   render: ->
     if this.props.song
       return `<div className='song'>

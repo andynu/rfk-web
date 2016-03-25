@@ -6,6 +6,7 @@
     = stylesheet_link_tag    'application', media: 'all', debug: false
   %body
     .container-fluid
-      = react_component('Player', nil, {id: 'player'})
+      -#= react_component('Player', nil, {id: 'player'})
+      #player
 
-= javascript_include_tag 'application', debug: false
+= javascript_include_tag 'application', debug: true

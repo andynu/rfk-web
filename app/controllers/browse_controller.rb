@@ -22,4 +22,22 @@ class BrowseController < ApplicationController
 
     @songs = @folder.songs.page(params[:song_page]) if @folder.present?
   end
+
+  def folders
+    folder = Folder.where(full_path: params[:path]).first
+    depth = folder.try(:depth) || 0
+    path = folder.try(:full_path) || ''
+    folders = Folder.order('depth asc, path asc')\
+              .where('full_path like ?', "#{path}%")\
+              .where(depth: depth+1)\
+              .page(params[:folder_page] || 0).per(100)
+    render json: folders.as_json(methods: 'key')
+  end
+
+  def songs
+    folder = Folder.where(full_path: params[:path]).first
+    songs = folder.songs.page(params[:song_page]) if @folder.present?
+    render json: songs
+  end
+
 end

@@ -1,27 +1,36 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
-@state = {}
+@state =
+  current_song: null
+  connection_status: false
+  player_state: 'paused'
+  folders: []
+
 $ ->
   now_playing()
-  setInterval now_playing, 1000
+  #setInterval now_playing, 1000
+
+  window.folder_search(null)
 
 now_playing = () ->
-
   window.rfk.status (data) =>
-    current_song =
+    @state.connection_status = true
+    @state.player_state = data.PlayPauseState
+    @state.current_song =
       title: data.CurrentSongMeta.Title
       artist: data.CurrentSongMeta.Artist
       album: data.CurrentSongMeta.Album
       rank: data.CurrentSong.Rank
 
-    @state =
-      connection_status: true
-      player_state: data.PlayPauseState
-      current_song: current_song
+    rerender()
 
+window.folder_search = (path) ->
+  window.browse.folders {path: path}, (folders) ->
+    @state.folders = folders
+    rerender()
 
-    ReactDOM.render(
-      React.createElement(Player, @state ),
-      document.getElementById('player'))
-
+rerender = ->
+  ReactDOM.render(
+    React.createElement(Player, @state ),
+    document.getElementById('player'))

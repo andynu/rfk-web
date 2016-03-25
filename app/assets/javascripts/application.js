@@ -17,6 +17,7 @@
 //= require twitter/bootstrap
 //# require turbolinks
 //= require rfk_api
+//= require browse_api
 //= require angular
 //= require angular_controllers
 //= require react
