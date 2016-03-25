@@ -14,7 +14,7 @@
     window.rfk.request this.props.song.audio_hash, (requests) ->
       window.state.request_hashes = []
       for song in requests
-        console.log song
+        #console.log song
         window.state.request_hashes.push song.Hash
       window.rerender()
 

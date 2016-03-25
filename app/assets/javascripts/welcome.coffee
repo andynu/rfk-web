@@ -32,8 +32,9 @@ now_playing = () ->
 requests = () ->
   window.rfk.requests (requests) =>
     @state.request_hashes = []
-    for song in requests
-      @state.request_hashes.push song.Hash
+    if requests isnt null
+      for song in requests
+        @state.request_hashes.push song.Hash
     @state.request_count = @state.request_hashes.length
     rerender()
 
@@ -45,12 +46,10 @@ window.clear_requests = (path) ->
 
 window.request_path = (path) ->
   window.rfk.requestByPath path, (data) ->
-    console.log data
     rerender()
 
 window.folder_search = (path) ->
   window.browse.folders {path: path}, (data) ->
-    console.log data
     @state.folders = data.folders
     @state.songs = data.songs
     rerender()
