@@ -14,13 +14,11 @@
 //= require jquery_ujs
 //# require jquery.event.move
 //# require jquery.event.swipe
-//= require twitter/bootstrap
 //= require underscore
 //# require turbolinks
 //= require rfk_api
 //= require browse_api
-//= require angular
-//= require angular_controllers
+//= require semantic_ui/semantic_ui
 //= require react
 //= require react_ujs
 //= require components

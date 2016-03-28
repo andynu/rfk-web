@@ -8,17 +8,19 @@
 
   render: ->
     switch this.props.player_state
-      when 'playing' then playpause = `<i className='fa fa-pause' />`
-      when 'paused' then playpause = `<i className='fa fa-play' />`
+      when 'playing' then playpause = `<i className='icon pause' />`
+      when 'paused' then playpause = `<i className='icon play' />`
 
-    `<div className='player_controls'>
-      <div className='btn btn-default' onClick={this.handlePause}>
-        {playpause}
-      </div>
-      <div className='btn btn-default' onClick={this.handleReward}>
-        <i className='fa fa-thumbs-o-up' /> reward
-      </div>
-      <div className='btn btn-default' onClick={this.handleSkip}>
-        <i className='fa fa-thumbs-o-down' /> skip
+    `<div className='extra content'>
+      <div className='ui three item menu'>
+        <a className='item' onClick={this.handlePause}>
+          {playpause}
+        </a>
+        <a className='item' onClick={this.handleReward}>
+          <i className='thumbs up icon' /> reward
+        </a>
+        <a className='item' onClick={this.handleSkip}>
+          <i className='thumbs down icon' /> skip
+        </a>
       </div>
     </div>`

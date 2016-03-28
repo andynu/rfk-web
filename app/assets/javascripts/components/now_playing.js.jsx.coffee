@@ -7,12 +7,17 @@
         artist: '',
         album: ''
 
+  
   render: ->
-    if this.props.song
-      return `<div className='song'>
-                <div className='rank'>{this.props.song.rank}</div>
-                <div className='title'>{this.props.song.title}</div>
-                <div className='artist'>{this.props.song.artist}</div>
-                <div className='album'>{this.props.song.album}</div>
+    song = this.props.song
+    rank_polarity = 'ui right ribbon label '
+    rank_polarity += 'green' if song.rank > 0
+    rank_polarity += 'red' if song.rank < 0
+    if song
+      return `<div className='content song'>
+                <div className={rank_polarity}>{song.rank}</div>
+                <div className='title'>{song.title}</div>
+                <div className='artist'>{song.artist}</div>
+                <div className='album'>{song.album}</div>
               </div>`
     return `<div />`

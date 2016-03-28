@@ -3,10 +3,11 @@
     window.folder_search window.pop_path()
 
   render: ->
-    `<div className='folder list-group-item' onClick={this.handleClick}>
-      <i className='fa fa-music text-muted' />
-      &nbsp;
-      ...
+    `<div className='folder item' onClick={this.handleClick}>
+      <i className='folder icon' />
+      <div className='content'>
+      &hellip;
+      </div>
       </div>`
 
 @Song = React.createClass
@@ -20,12 +21,14 @@
 
   render: ->
     request_badge = `<div/>`
-    request_badge = `<i className='fa fa-list' />` if _.indexOf(window.state.request_hashes, this.props.song.audio_hash) > -1
-    `<div className='song list-group-item' onClick={this.handleClick}>
-      <i className='fa fa-music text-muted' />
-      &nbsp;
+    request_badge = `<i className='list icon' />` if _.indexOf(window.state.request_hashes, this.props.song.audio_hash) > -1
+
+    `<div className='song item' onClick={this.handleClick}>
       <div className='pull-right'>{request_badge}</div>
+      <i className='music icon' />
+      <div className='content'>
       {this.props.song.title}
+      </div>
       </div>`
 
 @Folder = React.createClass
@@ -37,23 +40,24 @@
     e.stopPropagation()
     window.request_path this.props.folder.full_path
   render: ->
-    request_badge = `<div className='btn btn-default btn-xs' onClick={this.requestPath}>
-      <i className='fa fa-list' />
-      </div>`
+    request_badge = `<div className='' onClick={this.requestPath}>
+      <i className='list icon' />
+    </div>`
 
-    `<div className='folder list-group-item' onClick={this.cwd}>
-      <i className='fa fa-folder text-muted' />
-      &nbsp;
-      <div className='pull-right'>{request_badge}</div>
+    `<div className='folder item' onClick={this.cwd}>
+      <div className='right floated content'>{request_badge}</div>
+      <i className='icon folder' />
+      <div className='content'>
       {this.props.folder.path}
-      </div>`
+      </div>
+    </div>`
 
 @FolderFilter = React.createClass
   handleFilter: (e) ->
     console.log e
   render: ->
-    `<div>
-      <input type='text' className='form-element' placeholder='filter' onChange={this.handleFilter} />
+    `<div className='ui form'>
+      <input type='text' className='' placeholder='filter' onChange={this.handleFilter} />
      </div>`
 
 @FilteredFolderList = React.createClass
@@ -72,18 +76,24 @@
       for s in this.props.songs
         songs.push `<Song song={s} />`
 
-    `<div className='panel panel-default'>
-      <div className='panel-heading'>
-      <div className='pull-right'>
-        <div className='badge'>{this.props.request_count}</div>
-        <div className='btn btn-default btn-xs' onClick={this.clearRequests}>
-          <i className='fa fa-list' />
-          <i className='fa fa-times' />
+    `<div className=''>
+      <div className='ui menu'>
+        <div className='item'>
+          <FolderFilter />
+        </div>
+        <div className='item'>
+          <div className='ui label'>
+            <i className='list icon' />
+            {this.props.request_count}
+          </div>
+        </div>
+        <div className='item'>
+          <button className='ui icon button' onClick={this.clearRequests}>
+            <i className='remove icon' />
+          </button>
         </div>
       </div>
-      <FolderFilter />
-      </div>
-      <div className='list-group'>
+      <div className='ui relaxed divided list'>
         <UpDir />
         {folders}
         {songs}
