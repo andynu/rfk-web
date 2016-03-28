@@ -31,8 +31,8 @@ class BrowseController < ApplicationController
     path = folder.try(:full_path) || ''
     folders = Folder.order('depth asc, path asc')\
               .where('full_path like ?', "#{path}%")\
-              .where(depth: depth+1)\
-              .page(params[:folder_page] || 0).per(100)
+              .where(depth: depth+1)
+              #.page(params[:folder_page] || 0).per(100)
     songs = folder.songs.page(params[:song_page]) if folder.present?
 
     render json: {
