@@ -14,9 +14,9 @@
 
 $ ->
   now_playing()
-  #setInterval now_playing, 1000
+  setInterval now_playing, 1000
   requests()
-  #setInterval requests, 5000
+  setInterval requests, 5000
   folder_search(null)
 
 window.rerender = rerender = ->
@@ -55,7 +55,7 @@ reducer = (action, state) ->
       state.request_count = 0
 
     when 'search'
-      state.folders = []
+      state.folders = action.data.folders
       state.songs = action.data.songs
 
     when 'folder_search'
