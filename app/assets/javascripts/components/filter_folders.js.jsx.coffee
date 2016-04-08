@@ -4,10 +4,10 @@
 
   render: ->
     `<div className='folder item' onClick={this.handleClick}>
-      <i className='folder icon' />
-      <div className='content'>
-      &hellip;
-      </div>
+        <i className='folder icon' />
+        <div className='content'>
+        &hellip;
+        </div>
       </div>`
 
 @Song = React.createClass
@@ -55,6 +55,7 @@
 @FolderFilter = React.createClass
   handleFilter: (e) ->
     console.log e
+    window.search($(e.target).val())
   render: ->
     `<div className='ui form'>
       <input type='text' className='' placeholder='filter' onChange={this.handleFilter} />

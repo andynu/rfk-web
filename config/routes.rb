@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get 'folders' => 'browse#folders'
   get 'songs' => 'browse#songs'
+  get 'search' => 'browse#search'
 
   #mount JasmineRails::Engine => '/specs' if defined?(JasmineRails)
   get 'welcome/index'

@@ -48,4 +48,14 @@ class BrowseController < ApplicationController
     render json: songs
   end
 
+  def search
+    term = params[:term]
+    folders = Folder.search_for(term).page(1)
+    songs = Song.search_for(term).page(1)
+    render json: {
+      folders: folders.as_json(methods: 'key'),
+      songs: songs.as_json(methods: 'key')
+    }
+  end
+
 end

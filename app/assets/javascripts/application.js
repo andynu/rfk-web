@@ -16,10 +16,11 @@
 //# require jquery.event.swipe
 //= require underscore
 //# require turbolinks
-//= require rfk_api
-//= require browse_api
 //= require semantic_ui/semantic_ui
 //= require react
 //= require react_ujs
-//= require components
-//= require_tree .
+//
+//= require_tree ./components
+//= require_tree ./services
+//= require app
+//# require_tree .
