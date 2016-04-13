@@ -14,9 +14,13 @@
 //= require jquery_ujs
 //# require jquery.event.move
 //# require jquery.event.swipe
-//= require twitter/bootstrap
-//= require turbolinks
-//= require rfk_api
-//= require angular
-//= require angular_controllers
-//= require_tree .
+//= require underscore
+//# require turbolinks
+//= require semantic_ui/semantic_ui
+//= require react
+//= require react_ujs
+//
+//= require_tree ./components
+//= require_tree ./services
+//= require app
+//# require_tree .

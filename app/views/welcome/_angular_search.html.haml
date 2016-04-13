@@ -1,0 +1,14 @@
+%form.form-inline
+  .input-group
+    %span.input-group-addon
+      = icon('search')
+    %input.form-control(ng-model='term' type='text' ng-change="search()")
+    %span.input-group-btn
+      %button.btn.btn-default(ng-click="searchRequest()")
+        = icon('play')
+        = icon('list')
+
+%ul.list-group
+  %li.list-group-item(ng-repeat="song in search_songs")
+    %small.text-muted.hash {{song.Hash}}
+    %span.path {{song.Path}}

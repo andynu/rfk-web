@@ -3,4 +3,7 @@ class Song < ActiveRecord::Base
   has_many :folder_songs
   has_many :folders, through: :folder_songs
 
+  def key
+    id
+  end
 end
