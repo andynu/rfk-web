@@ -1,4 +1,4 @@
-@Player = React.createClass
+window.Player = React.createClass
   render: ->
     `<div className='container-fluid'>
         <div className='row'>
